@@ -8,28 +8,54 @@ abstract class PairMap{
 }
 
 class Dictionary extends PairMap{
+    private int l=0;
     public Dictionary(int n){
         keyArray = new String[n];
         valueArray = new String[n];
     }
     @Override
     String get(String key) {
+        int i=0;
+        for(String Key : keyArray){
+            if(key.equals(Key))
+                return valueArray[i];
+            i++;
+        }
         return null;
     }
 
     @Override
     void put(String key, String value) {
-
+        int i;
+        for(i=0; i<l; i++){
+            if(key.equals(keyArray[i])){
+                valueArray[i]=value;
+                break;
+            }
+        }
+        if(i==l){
+            keyArray[l]=key;
+            valueArray[l]=value;
+        }
+        l++;
     }
 
     @Override
     String delete(String key) {
+        for(int i=0; i<l; i++){
+            if(key.equals(keyArray[i])){
+                keyArray[i]=null;
+                String s = valueArray[i];
+                valueArray[i]=null;
+                return s;
+            }
+        }
         return null;
     }
 
     @Override
     int length() {
-        return 0;
+        return l;
     }
 }
 public class Chapter5_10 {
